@@ -1,6 +1,6 @@
 .. _zigbee_recibo_bmi160:
 
-Zigbee TAEE: Receive data BMI160
+TFG: Receive data BMI160
 ##################
 
 .. contents::
