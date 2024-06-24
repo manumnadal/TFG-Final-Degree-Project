@@ -1,6 +1,6 @@
 .. _zigbee_envio_bmi160:
 
-Zigbee TAEE: Send data BMI160
+TFG: Send data BMI160
 ####################
 
 .. contents::
