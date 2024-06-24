@@ -1,0 +1,18 @@
+&timer2 {
+	status = "okay";
+};
+
+&i2c1 {
+	bmi160@69 {
+		compatible = "bosch,bmi160";
+		reg = <0x69>;
+		int-gpios = <&gpio0 7 0>, <&gpio0 6 0>;
+	};
+};
+/delete-node/ &pcf8574_1;
+
+&i2c1_default {
+	group1 {
+		psels = <NRF_PSEL(TWIM_SDA, 0, 5)>, <NRF_PSEL(TWIM_SCL, 0, 4)>;
+	};
+};
