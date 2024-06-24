@@ -6,7 +6,7 @@ Final Degree Project as part of my Electronic Systems B. E at [Universidad de M�
 
 **The structure of the repository is as follows:**
 ```
-ZigbeeDemoTAEE2024
+Final Degree Project
 ├── envio_string
 ├── recibo_string
 ├── envio_bmi160
