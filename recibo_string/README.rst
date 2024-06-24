@@ -1,6 +1,6 @@
 .. _zigbee_recibo_string:
 
-Zigbee TAEE: Receive string
+TFG: Receive string
 ##################
 
 .. contents::
