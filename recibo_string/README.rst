@@ -1,128 +1,38 @@
-.. _zigbee_light_bulb_sample:
+.. _zigbee_recibo_string:
 
-Zigbee: Light bulb
+Zigbee TAEE: Receive string
 ##################
 
 .. contents::
    :local:
    :depth: 2
 
-This :ref:`Zigbee <ug_zigbee>` Light bulb sample demonstrates a simple light bulb whose brightness can be adjusted by another device.
+English
+------
+This project is responsible for receiving the string data sent by the sending device to the custom cluster that has been created. It is made up of three files: "lcd1602a.c" (library for the screen), "main.c" (main code that executes) and "zb_zcl_custom_cluster.c" (custom cluster definition).
 
-You can use this sample with the :ref:`Zigbee Network coordinator <zigbee_network_coordinator_sample>` and the :ref:`Zigbee Light switch <zigbee_light_switch_sample>` to set up a basic Zigbee network.
+The connections of the LCD screen with the development board are shown below:
 
-Requirements
-************
+* GND -> GND 
+* VCC -> 5V
+* SDA -> P0.05
+* SCL -> P0.04
 
-The sample supports the following development kits:
+To do this, it receives the data through a handler that will decrypt the received message and be able to obtain, in a simple way, the information it contains. With this information, the content of the cluster is changed with the data received and it will be sent through a data queue to a task in charge of displaying the data received on an LCD screen.
 
-.. table-from-sample-yaml::
+In order to manage the screen without complications, a library has been developed whose code can be found in the "src" folder with the name "lcd1602.c".
 
-You can use one or more of the development kits listed above and mix different development kits.
+Español
+------
+Este proyecto se encarga de recibir un mensaje string enviado por el dispositivo emisor al cluster personalizado que se ha creado. Esta formado por cuatro ficheros: "lcd1602a.c" (librería para la pantalla), "main.c" (código principal que ejecuta) y "zb_zcl_custom_cluster.c" (definición del cluster personalizado).
 
-To test this sample, you also need to program the following samples:
+Las conexiones de la pantalla LCD con la placa de desarrollo se muestra a continuación:
 
-* The :ref:`Zigbee Network coordinator <zigbee_network_coordinator_sample>` sample on one separate device.
-* The :ref:`Zigbee Light switch <zigbee_light_switch_sample>` sample on one or more separate devices.
+* GND -> GND 
+* VCC -> 5V
+* SDA -> P0.05
+* SCL -> P0.04
 
-Overview
-********
+Para ello, recibe los datos a través de un manejador que descifrará el mensaje recibido pudiendo obtener, de manera simple, la información que contiene. Con esta información, se cambia el contenido del cluster con los datos recibido y se envíara a través de una cola de datos a una tarea encargada de mostrar los datos recibidos por una pantalla LCD.
 
-The Zigbee Light bulb sample takes the Zigbee Router role and implements the Dimmable Light device specification, as defined in the Zigbee Home Automation public application profile.
-This profile allows changing the brightness level of a LED of the light bulb.
-
-Configuration
-*************
-
-|config|
-
-FEM support
-===========
-
-.. include:: /includes/sample_fem_support.txt
-
-User interface
-**************
-
-LED 1:
-    Blinks to indicate that the main application thread is running.
-
-LED 3:
-    Turns on when the light bulb joins the network.
-
-LED 4:
-    Indicates the dimmable light option, that is changes to the light bulb brightness.
-    It can be controlled by another Zigbee device in the network, for example a light switch.
-    Blinks when the light bulb is in Identify mode.
-
-Button 4:
-    Depending on how long the button is pressed:
-
-    * If pressed for less than five seconds, it starts or cancels the Identify mode.
-    * If pressed for five seconds, it initiates the `factory reset of the device <Resetting to factory defaults_>`_.
-      The length of the button press can be edited using the :kconfig:option:`CONFIG_FACTORY_RESET_PRESS_TIME_SECONDS` Kconfig option from :ref:`lib_zigbee_application_utilities`.
-      Releasing the button within this time does not trigger the factory reset procedure.
-
-Building and running
-********************
-.. |sample path| replace:: :file:`samples/zigbee/light_bulb`
-
-|enable_zigbee_before_testing|
-
-.. include:: /includes/build_and_run.txt
-
-.. _zigbee_light_bulb_sample_testing:
-
-Testing
-=======
-
-After programming the sample to your development kits, complete the following steps to test it:
-
-1. Turn on the development kit that runs the Network coordinator sample.
-
-   When **LED 3** turns on, this development kit has become the Coordinator of the Zigbee network and the network is established.
-
-#. Turn on the development kit that runs the Light bulb sample.
-
-   When **LED 3** turns on, the light bulb has become a Router inside the network.
-
-   .. note::
-      If **LED 3** does not turn on, press **Button 1** on the Coordinator to reopen the network.
-
-#. Turn on the development kit that runs the Light switch sample.
-
-   When **LED 3** turns on, the light switch has become an End Device, connected directly to the Coordinator.
-
-#. Wait until **LED 4** on the development kit that runs the Light switch sample turns on.
-
-   This LED indicates that the switch found a light bulb to control.
-
-#. Use the buttons on the development kit that runs the :ref:`zigbee_light_switch_sample` sample to control the light bulb.
-
-   The result of using the buttons is reflected on the light bulb's **LED 4**.
-
-You can now use buttons on the light switch to control the light bulb, as described in the :ref:`zigbee_light_switch_user_interface` section of the Light switch sample page.
-
-Dependencies
-************
-
-This sample uses the following |NCS| libraries:
-
-* :ref:`lib_zigbee_error_handler`
-* :ref:`lib_zigbee_application_utilities`
-* Zigbee subsystem:
-
-  * :file:`zb_nrf_platform.h`
-
-* :ref:`dk_buttons_and_leds_readme`
-
-It uses the following `sdk-nrfxlib`_ libraries:
-
-* :ref:`nrfxlib:zboss` |zboss_version| (`API documentation`_)
-
-In addition, it uses the following Zephyr libraries:
-
-* :file:`include/zephyr.h`
-* :file:`include/device.h`
-* :ref:`zephyr:logging_api`
-* :ref:`zephyr:pwm_api`
+Para poder manejar la pantalla sin complicación, se ha desarrollado una librería cuyo código se puede encontrar en la carpeta "src" con el nombre de "lcd1602.c".
